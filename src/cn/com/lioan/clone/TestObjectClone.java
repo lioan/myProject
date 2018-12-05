@@ -1,4 +1,4 @@
-package cn.com.lioan.basic.clone;
+package cn.com.lioan.clone;
 
 public class TestObjectClone {
 
