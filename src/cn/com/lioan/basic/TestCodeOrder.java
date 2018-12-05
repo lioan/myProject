@@ -1,4 +1,4 @@
-package cn.com.Basic;
+package cn.com.lioan.basic;
 
 public class TestCodeOrder {
 
