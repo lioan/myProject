@@ -11,6 +11,31 @@ import java.io.ObjectOutputStream;
 
 public class TestSerializable {
 
+    public static void main(String[] args) {
+        UserInfo u1 = new UserInfo();
+        UserInfoExt userInfoExt1 = new UserInfoExt();
+        userInfoExt1.setAddress("SZ");
+        userInfoExt1.setMarry(true);
+        userInfoExt1.setPostCode("518000");
+        u1.setIdentityNum("1001");
+        u1.setName("U1");
+        u1.setAge(29);
+        u1.setPhone("13800000001");
+        u1.setPasswd("1111");
+        u1.setUserInfoExt(userInfoExt1);
+        UserInfo u2 = new UserInfo("1001", "U2", 33, "18988888888", "1112");
+        UserInfo[] users = {u1, u2};
+        String desc = "user_1.obj";
+        try {
+            serializableUsers(users, desc);
+            deSerializableUsers(desc, 2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void serializableUsers(UserInfo[] users, String desc) throws IOException {
         System.out.println("users serializable begin==============");
         FileOutputStream fos = new FileOutputStream(desc);
@@ -42,31 +67,6 @@ public class TestSerializable {
         ios.close();
         System.out.println("users deserializable success==============");
         return users;
-    }
-
-    public static void main(String[] args) {
-        UserInfo u1 = new UserInfo();
-        UserInfoExt userInfoExt1 = new UserInfoExt();
-        userInfoExt1.setAddress("SZ");
-        userInfoExt1.setMarry(true);
-        userInfoExt1.setPostCode("518000");
-        u1.setIdentityNum("1001");
-        u1.setName("U1");
-        u1.setAge(29);
-        u1.setPhone("13800000001");
-        u1.setPasswd("1111");
-        u1.setUserInfoExt(userInfoExt1);
-        UserInfo u2 = new UserInfo("1001", "U2", 33, "18988888888", "1112");
-        UserInfo[] users = {u1, u2};
-        String desc = "user_1.obj";
-        try {
-            serializableUsers(users, desc);
-            deSerializableUsers(desc, 2);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
 }
