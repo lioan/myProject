@@ -7,15 +7,19 @@ import java.nio.channels.FileChannel;
 public class IoVsNio {
 
     public static void main(String[] args) {
-//        ioFile();
-        nioFile();
+        //File相关的路径是以当前运行路径设置
+        System.out.println(new File("").getAbsolutePath() + File.separator);
+        ioFile();
+//        nioFile();
     }
 
     public static void ioFile() {
         int r = 0;
         InputStream in = null;
         try {
-            in = new BufferedInputStream(new FileInputStream("files/nio.txt"));
+//            in = new BufferedInputStream(new FileInputStream("files/nio.txt"));
+            //路径加/表示的是当前类路径，否则为classpath路径，用classloader就不需要/
+            in = new BufferedInputStream(IoVsNio.class.getResourceAsStream("/files/nio.txt"));
             byte[] buf = new byte[1024];
             int len;
             for (;(len = in.read(buf)) != -1;) {

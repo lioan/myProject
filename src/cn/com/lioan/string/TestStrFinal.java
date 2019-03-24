@@ -16,18 +16,20 @@ import java.lang.reflect.Field;
 public class TestStrFinal {
 
     public static void main(String[] args) throws Exception {
-        String s1 = "abc";
-        String s2 = new String(s1);
-        String s3 = "abc";
-        System.out.println("s1 address:" + System.identityHashCode(s1));
-        System.out.println("s2 address:" + System.identityHashCode(s2));
-        System.out.println("s3 address:" + System.identityHashCode(s3));
+//        String s1 = "abc";
+//        String s2 = new String(s1);
+//        String s3 = "abc";
+//        System.out.println("s1 address:" + System.identityHashCode(s1));
+//        System.out.println("s2 address:" + System.identityHashCode(s2));
+//        System.out.println("s3 address:" + System.identityHashCode(s3));
 
-        System.out.println("-----------string add------------------");
-        strAdd();
+//        System.out.println("-----------string add------------------");
+//        strAdd();
 
-        System.out.println("-----------string reflect------------------");
+//        System.out.println("-----------string reflect------------------");
         strReflectChg();
+
+//        strIntern();
 
     }
 
@@ -37,6 +39,28 @@ public class TestStrFinal {
         System.out.println(s);
         s = new StringBuilder("abc").append("d").toString();
         System.out.println(s);
+    }
+
+    /**
+     * JDK1.7之后，String对象调用 intern方法首先是检查常量池中是否已经存在
+     * 如果存在则直接返回，否则找不到对应的字符串，则在常量池中生成一个源字符串的引用，
+     * 而不是跟以前一样将字符串拷贝到常量池中
+     * 但是根据下面的测试好像不是这样的，还是直接拷贝字符串到常量池中！！
+     */
+    public static void strIntern() {
+        String str1 = new String("str1");
+        System.out.println("str1地址:" + System.identityHashCode(str1));
+        System.out.println("str1.intern()地址：" + System.identityHashCode(str1.intern()));
+        String str2 = "str1";
+        System.out.println("str2地址：" + System.identityHashCode(str2));
+        System.out.println(str1 == str2);
+
+        String str3 = new String("str3");
+        String str4 = "str3";
+        System.out.println("str3地址：" + System.identityHashCode(str3));
+        System.out.println("str4地址:" + System.identityHashCode(str4));
+        System.out.println("str3.intern()地址：" + System.identityHashCode(str3.intern()));
+        System.out.println(str3 == str4);
     }
 
     public static void strReflectChg() throws Exception {

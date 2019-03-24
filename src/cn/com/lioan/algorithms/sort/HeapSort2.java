@@ -7,6 +7,15 @@ import java.util.Arrays;
  * 堆排序demo
  */
 public class HeapSort2 {
+
+    public static void main(String[] args){
+//    int[] arr = {4,6,8,5,9};
+        int[] arr = {9,6,7,3,8,1,5,2,4};
+        System.out.println(Arrays.toString(arr));
+        heapSort_weixin(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
     public static void heapSort_weixin(int[] arr) {
         //1.构建大顶堆
         for (int i = arr.length/2-1; i >= 0; i--) {
@@ -42,13 +51,5 @@ public class HeapSort2 {
         arr[i] = arr[i] + arr[j];
         arr[j] = arr[i] - arr[j];
         arr[i] = arr[i] - arr[j];
-    }
-
-    public static void main(String[] args){
-//    int[] arr = {4,6,8,5,9};
-        int[] arr = {9,6,7,3,8,1,5,2,4};
-        System.out.println(Arrays.toString(arr));
-        heapSort_weixin(arr);
-        System.out.println(Arrays.toString(arr));
     }
 }
